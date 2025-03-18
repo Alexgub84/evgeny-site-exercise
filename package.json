@@ -6,11 +6,13 @@
     "dev": "astro dev",
     "build": "astro build",
     "preview": "astro preview",
-    "astro": "astro"
+    "astro": "astro",
+    "deploy": "npm run build && firebase deploy --only hosting"
   },
   "dependencies": {
     "@tailwindcss/vite": "^4.0.5",
     "astro": "^5.2.5",
+    "firebase-tools": "^13.30.0",
     "tailwindcss": "^4.0.5"
   }
 }
