@@ -94,26 +94,41 @@ const services = [
 	</main>
 </div>
 
-<!-- <script>
+<script>
 	const form = document.getElementById('contactForm');
 	
-	form.addEventListener('submit', (event) => {
-	  event.preventDefault();
-	  
-	  const formData = {
-		customerName: document.getElementById('customer_name').value,
-		customerPhone: document.getElementById('customer_phone').value,
-		customerEmail: document.getElementById('customer_email').value,
-		selectedService: document.querySelector('input[name="selected_service"]:checked').value
-	  };
-  
-	  const formattedData = `
-  customerName: ${formData.customerName}
-  customerPhone: ${formData.customerPhone}
-  customerEmail: ${formData.customerEmail}
-  selectedService: ${formData.selectedService}
-	  `;
-  
-	  alert(`Evgeny, now it's your turn to shine!\n\n${formattedData}`);
+	form.addEventListener('submit', async (event) => {
+		event.preventDefault();
+		console.log('Form submission started');
+		
+		const formData = {
+			customer_name: document.getElementById('customer_name').value,
+			customer_phone: document.getElementById('customer_phone').value,
+			customer_email: document.getElementById('customer_email').value,
+			selected_service: document.querySelector('input[name="selected_service"]:checked').value
+		};
+		
+		console.log('Form data collected:', formData);
+
+		try {
+			const response = await fetch(form.action, {
+				method: 'POST',
+				headers: {
+					'Content-Type': 'application/json',
+				},
+				body: JSON.stringify(formData)
+			});
+
+			if (response.ok) {
+				console.log('Form submitted successfully');
+				alert('Thank you for your submission! We will contact you soon.');
+				form.reset();
+			} else {
+				throw new Error('Network response was not ok');
+			}
+		} catch (error) {
+			console.log('Form submission error:', error);
+			alert('There was an error submitting the form. Please try again.');
+		}
 	});
-  </script> -->
+</script>
